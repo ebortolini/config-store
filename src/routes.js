@@ -51,7 +51,7 @@ apiRouter.put('/kv/:key', async (req, res) => {
         return res.status(400).json({error: "value are required"});
 
     try {
-        const [updatedCount] = await KV.update({value}, {where: {key }});
+        const [updatedCount] = await KV.update({value}, {where: {key: key }});
 
         if (updatedCount > 0)
         {
@@ -74,7 +74,7 @@ apiRouter.delete('/kv/:key', async (req, res) => {
 
         if (deleted > 0)
         {
-            return res.status(204);
+            return res.sendStatus(204);
         }
         return res.status(404).json({error: 'key not found'});
     } catch(err) {
